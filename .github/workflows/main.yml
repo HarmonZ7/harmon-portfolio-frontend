@@ -28,12 +28,12 @@ jobs:
           audience: sts.amazonaws.com
 
       - name: Install pip and AWS
-          run: |
-            pip install --upgrade pip
-            pip install aws
+        run: |
+          pip install --upgrade pip
+          pip install aws
 
       - name: Check AWS Credentials
-          run: aws sts get-caller-identity
+        run: aws sts get-caller-identity
 
       - name: Sync files to S3
         run: |
