@@ -1,9 +1,9 @@
 name: Frontend S3 Bucket Sync
 
 on:
-  push:
-    branches:
-      - main  # deploy test automatically
+  #push:
+    #branches:
+      #- main  # deploy test automatically
   workflow_dispatch:  # allows manual triggers for prod
 
 permissions:
@@ -11,8 +11,8 @@ permissions:
   contents: read
 
 jobs:
-  deploy-test:
-    name: Deploy to Test
+  deploy-prod:
+    name: Deploy to Production
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'  # only for main branch
 
@@ -23,7 +23,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: ${{ secrets.AWS_ARN_TEST }}
+          role-to-assume: ${{ secrets.AWS_ARN_PROD }}
           aws-region: ${{ secrets.AWS_REGION }}
           audience: sts.amazonaws.com
 
@@ -31,7 +31,7 @@ jobs:
         run: aws sts get-caller-identity
 
       - name: Clear cloudfront cache
-        run: aws cloudfront create-invalidation --distribution-id EP4L308G73BTN --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id E2KBLTVV893N9E --paths "/*"
 
       - name: Sync files to S3
         run: |
