@@ -24,6 +24,7 @@ as I could while maintaining an efficient and light-weight application.
 
 ## Project Structure
 
+```
 harmon-portfolio-frontend/
 ├── .github/
 │   └── workflows/
@@ -43,3 +44,4 @@ harmon-portfolio-frontend/
 │   │      └── basic_headshot.jpeg
 │   └── index.html
 └── README.md
+```
