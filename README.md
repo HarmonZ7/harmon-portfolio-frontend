@@ -12,6 +12,7 @@ as I could while maintaining an efficient and light-weight application.
 - Entirely cloud hosted on AWS
 - Implemented visitor counter by using JavaScript to query an AWS serverless API with additional backend explained in my [backend repository](https://github.com/HarmonZ7/harmon-portfolio-backend).
 - Fully functional CI/CD with Github Actions updating and deploying live resources on AWS.
+    - Workflow authenticates AWS access, then syncronizes my repository and S3 bucket, then clears the cache in my CloudFront distribution to display new content immediately.
 
 ## Tech Stack
 
@@ -28,7 +29,7 @@ as I could while maintaining an efficient and light-weight application.
 harmon-portfolio-frontend/
 ├── .github/
 │   └── workflows/
-│       └── main.yaml
+│       └── main.yml
 ├── dist/
 │   ├── css/
 │   │   └── styles.css
