@@ -82,7 +82,7 @@
    Smooth Scroll for Section Buttons
 ------------------------------ */
   const sectionButtons = document.querySelectorAll(
-    ".s-intro__content-btns a, .s-intro__btn-download a, .s-header__menu-links a, .s-intro__scroll-down a, .ss-go-top a"
+    ".s-intro__content-btns a, .s-header__menu-links a, .s-intro__scroll-down a, .ss-go-top a"
   );
 
   sectionButtons.forEach(function (btn) {
