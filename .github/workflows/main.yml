@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # deploy test automatically
+      - dev
   workflow_dispatch:  # allows manual triggers for prod
 
 permissions:
