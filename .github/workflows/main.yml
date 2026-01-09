@@ -33,10 +33,31 @@ jobs:
 
       - name: Deploy frontend and clear CloudFront Cache
         run: |
-          if [[ "$GITHUB_REF" == "refs/heads/dev" ]]; then
-            aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET_DEV }} --delete
-            aws cloudfront create-invalidation --distribution-id E3DZH8GONCYVQK --paths "/*"
-          else
             aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET }} --delete
             aws cloudfront create-invalidation --distribution-id E2KBLTVV893N9E --paths "/*"
-          fi
+  
+  deploy-dev:
+    name: Deploy to Dev
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'  # only for dev branch
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.AWS_ARN_PROD }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          audience: sts.amazonaws.com
+
+      - name: Check AWS Credentials
+        run: aws sts get-caller-identity
+
+      - name: Deploy frontend and clear CloudFront Cache
+        run: |
+            aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET_DEV }} --delete
+            aws cloudfront create-invalidation --distribution-id E3DZH8GONCYVQK --paths "/*"
+         
+
